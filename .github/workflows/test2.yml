@@ -2,51 +2,17 @@ name: testxx
 
 on:
   push:
-    branches:
-      - main
-    paths:
-      - '/Dockerfile'
+    branches: [ "main" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     env:
       IMAGE_NAME: ${{ vars.IMAGE_NAME }}
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
 
-    # Retrieve information for other steps
-    - name: Set up Docker Build Tag
-      run: |
-        VERSION=$(grep -m 1 '^ARG VERSION=' Dockerfile | cut -d '=' -f 2)
-        echo "VERSION=$VERSION" >> $GITHUB_ENV
-        echo "TAG=$VERSION" >> $GITHUB_ENV
 
-    # Display variables for debugging
-    - name: Display Tag for Confirmation
-      run: |
-        echo "Using tag       : $TAG"
-        echo "Using Dockerfile: $VERSION"
-
-    # Setup Docker buildx environment
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v3
-
-    # Build and load image for testing
-    - name: Build and export to Docker
-      uses: docker/build-push-action@v6
-      with:
-        context: .
-        file: ./Dockerfile
-        load: true
-        tags: "test_image"
-
-    # Use docker run to check image
-    # adjust the docker run command to test    
-    - name: Test
-      run: |
-        docker run -d --rm "test_image" 
 
