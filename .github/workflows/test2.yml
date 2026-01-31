@@ -19,9 +19,18 @@ jobs:
         VERSION=$(grep -m 1 '^ARG VERSION=' Dockerfile | cut -d '=' -f 2)
         echo "VERSION=$VERSION" >> $GITHUB_ENV
         echo "TAG=$VERSION" >> $GITHUB_ENV
-        
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+
+    # Display variables for debugging
+    - name: Display Tag for Confirmation
+      run: |
+        echo "Using tag       : $TAG"
+        echo "Using Dockerfile: $VERSION"
+
+    # Setup Docker buildx environment
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+
 
 
 
