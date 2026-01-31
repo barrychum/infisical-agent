@@ -60,3 +60,18 @@ jobs:
         username: ${{ github.repository_owner }}
         password: ${{ secrets.GHCR_TOKEN }}
 
+    # Build and push image to registies
+    # add your targets in the tags
+    # Authenticate using docker/login-action above
+    - name: Build and push
+      uses: docker/build-push-action@v6
+      with:
+        platforms: linux/amd64,linux/arm64
+        context: .
+        file: ./Dockerfile
+        push: true
+        tags: |
+          ${{ env.IMAGE_NAME }}:latest
+          ${{ env.IMAGE_NAME }}:${{ env.TAG }}
+          ghcr.io/${{ github.repository }}:latest
+
