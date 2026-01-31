@@ -1,0 +1,11 @@
+name: testx
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '/Dockerfile'
+  release:
+    types: [published]
+
