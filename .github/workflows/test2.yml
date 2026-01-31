@@ -75,3 +75,11 @@ jobs:
           ${{ env.IMAGE_NAME }}:${{ env.TAG }}
           ghcr.io/${{ github.repository }}:latest
           
+    - name: Run Docker Scout
+      uses: docker/scout-action@v1
+      with:
+        dockerhub-user: ${{ vars.DOCKER_USERNAME }}
+        dockerhub-password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
+        command: cves
+        image: ${{ env.IMAGE_NAME }}:latest
+
