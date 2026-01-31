@@ -10,7 +10,16 @@ jobs:
     env:
       IMAGE_NAME: ${{ vars.IMAGE_NAME }}
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # Retrieve information for other steps
+    - name: Set up Docker Build Tag
+      run: |
+        VERSION=$(grep -m 1 '^ARG VERSION=' Dockerfile | cut -d '=' -f 2)
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
+        echo "TAG=$VERSION" >> $GITHUB_ENV
+        
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
 
