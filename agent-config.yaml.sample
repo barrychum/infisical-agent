@@ -1,0 +1,18 @@
+infisical:
+  address: "http://infisical-app:8080"
+  projectId: "your_infisical_project_id"
+  environment: "dev"        # or "prod"
+
+auth:
+  type: "client-credentials"      # this is auth type for self-hosted
+  config:
+    clientId: "your_client_id"
+    clientSecret: "your_client_secret"
+
+# The Agent writes secrets for different apps into subfolders
+templates:
+  - source: |
+      {{- with secret "secret_key" -}}
+      secret_key="{{ .Value }}"
+      {{- end -}}
+    destination: "/secrets/flask-app/.env"
