@@ -10,3 +10,4 @@ WORKDIR /app
 COPY fetch_secrets.py .
 
 CMD ["python", "fetch_secrets.py"]
+
