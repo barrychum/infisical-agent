@@ -21,8 +21,10 @@ jobs:
 
     - name: Delete old image versions
       uses: actions/delete-package-versions@v5
+      continue-on-error: true 
       with:
         package-name: 'infisical-agent'
         package-type: 'container'
         min-versions-to-keep: 5
+        owner: 'barrychum' 
         delete-only-untagged-versions: 'false'
