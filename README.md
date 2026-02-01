@@ -1,6 +1,12 @@
 # infisical-agent
 
+[comment]: <> (Github license is provided by shields.io using standard parameters)
+[comment]: <> (customer badge requires a specific json that is generated in workflow)
+
 ![GitHub License](https://img.shields.io/github/license/barrychum/infisical-agent) ![Custom Badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/barrychum/6210ce668e923bd7b478ff9f965debee/raw/docker-infisical-agent-build-date-badge.json) 
+
+[comment]: <> (The create a badge, go to ghcr-badge.egpl.dev)
+[comment]: <> (Enter the requied badge details, click apply, copy the URL)
 
 ![Custom Badge](https://ghcr-badge.egpl.dev/barrychum/infisical-agent/tags?color=%2344cc11&ignore=&n=1&label=image+tags&trim=) ![Custom Badge](https://ghcr-badge.egpl.dev/barrychum/infisical-agent/size?color=%2344cc11&tag=latest&label=image+size&trim=)
 
