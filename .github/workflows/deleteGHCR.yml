@@ -7,6 +7,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write # This is the key permission
     steps:      
     # Login to GitHub Container Registry (ghcr)
     - name: Login to GitHub Container Registry
