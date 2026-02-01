@@ -141,4 +141,3 @@ jobs:
         gist_id: ${{ vars.GIST_ID }}
         file_path: ${{ steps.badge_data.outputs.json }}
         file_type: text
-
