@@ -4,7 +4,6 @@
 
 ![Custom Badge](https://ghcr-badge.egpl.dev/barrychum/infisical-agent/tags?color=%2344cc11&ignore=&n=1&label=image+tags&trim=) ![Custom Badge](https://ghcr-badge.egpl.dev/barrychum/infisical-agent/size?color=%2344cc11&tag=latest&label=image+size&trim=)
 
-
 Create a docker volume, infisical_shared_secrets, to store shared secrets.
 Deploy a container using the following docker compose.  Attach it to the same network of the inficial container.
 
