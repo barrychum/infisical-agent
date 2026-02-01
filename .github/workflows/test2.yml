@@ -18,6 +18,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read  # allow workflow to read repo only
+      packages: write # allow workflow to modify package (GHCR - Github Container Registry)
     env:
       IMAGE_NAME: ${{ vars.IMAGE_NAME }}
     steps:
