@@ -52,6 +52,7 @@ while INDEFINITE_LOOP:
             os.makedirs(os.path.dirname(dst_path), exist_ok=True)
 
             lines_out = []
+            
             for line in src.splitlines():
                 if "secret" in line:
                     key = line.split('"')[1]
