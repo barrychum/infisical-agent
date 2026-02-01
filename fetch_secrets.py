@@ -45,23 +45,24 @@ while INDEFINITE_LOOP:
         # response.secrets contains the actual secret objects
         secret_map = {s.secretKey: s.secretValue for s in response.secrets}
 
-        lines_out = []
         # Render templates
         for tpl in templates:
             src = tpl["source"]
             dst_path = tpl["destination"]
             os.makedirs(os.path.dirname(dst_path), exist_ok=True)
 
+            lines_out = []
             for line in src.splitlines():
                 if "secret" in line:
                     key = line.split('"')[1]
                     value = secret_map.get(key, "")
                     lines_out.append(f'{key}="{value}"')
 
-        with open(dst_path, "w") as f:
-            f.write("\n".join(lines_out))
+            with open(dst_path, "w") as f:
+                f.write("\n".join(lines_out))
 
-        print(f"Wrote secrets to {dst_path}")
+            print(f"Wrote secrets to {dst_path}")
+
 
     except Exception as e:
         print(f"Error fetching secrets: {e}")
