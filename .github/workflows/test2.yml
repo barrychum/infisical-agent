@@ -2,13 +2,16 @@ name: testxx
 
 on:
   push:
+    # when ./Dockerfile is updated
     branches:
       - main
     paths:
       - '/Dockerfile'
   release:
+    # when a new reliease is published
     types: [published]
   workflow_dispatch:
+    # allow manual run
 
 jobs:
   build:
