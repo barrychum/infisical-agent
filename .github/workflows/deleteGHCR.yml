@@ -7,8 +7,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      IMAGE_NAME: ${{ vars.IMAGE_NAME }}
     steps:      
     # Login to GitHub Container Registry (ghcr)
     - name: Login to GitHub Container Registry
