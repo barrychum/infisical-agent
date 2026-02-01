@@ -24,6 +24,6 @@ jobs:
       with:
         package-name: 'infisical-agent'
         package-type: 'container'
-        min-versions-to-keep: 65
-        owner: 'barrychum' 
+        min-versions-to-keep: 5
+        owner: ${{ github.repository_owner }}
         delete-only-untagged-versions: 'false'
