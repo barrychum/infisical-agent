@@ -126,7 +126,7 @@ jobs:
     - name: Create or update gist
       uses: stellarhub/push-gist-action@v1
       with:
-        token: ${{ secrets.DOCKER_ACCESS_TOKEN }}
+        token: ${{ secrets.GHCR_TOKEN }}
         gist_id: ${{ vars.GIST_ID }}
         file_path: ${{ steps.badge_data.outputs.json }}
         file_type: text
