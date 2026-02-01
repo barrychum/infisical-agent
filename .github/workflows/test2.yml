@@ -8,7 +8,7 @@ on:
     paths:
       - 'Dockerfile'
       # use **/Dockerfile to match any path
-      - '.github/workflows/*.yml'
+      # - '.github/workflows/*.yml'
   release:
     # when a new reliease is published
     types: [published]
@@ -85,7 +85,15 @@ jobs:
           ${{ env.IMAGE_NAME }}:latest
           ${{ env.IMAGE_NAME }}:${{ env.TAG }}
           ghcr.io/${{ github.repository }}:latest
-          
+
+    - name: Delete old image versions
+      uses: actions/delete-package-versions@v5
+      with:
+        package-name: ghcr.io/${{ github.repository }}
+        package-type: 'container'
+        min-versions-to-keep: 5
+        delete-only-untagged-versions: 'true'
+
     - name: Run Docker Scout
       uses: docker/scout-action@v1
       with:
