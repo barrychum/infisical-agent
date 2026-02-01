@@ -74,6 +74,17 @@ jobs:
         username: ${{ github.repository_owner }}
         password: ${{ secrets.GHCR_TOKEN }}
 
+    - name: Delete old GHCR image versions
+      uses: actions/delete-package-versions@v5
+      with:
+        package-name: ${{ github.event.repository.name }}
+        package-type: 'container'
+        min-versions-to-keep: 5
+        owner: ${{ github.repository_owner }}
+        token: ${{ secrets.GHCR_TOKEN }}
+        delete-only-untagged-versions: 'false'
+        # ignore-versions: '^(0|[1-9]\\d*)\\.0\\.0$'
+
     # Build and push image to registies
     # add your targets in the tags
     # Authenticate using docker/login-action above
@@ -88,15 +99,6 @@ jobs:
           ${{ env.IMAGE_NAME }}:latest
           ${{ env.IMAGE_NAME }}:${{ env.TAG }}
           ghcr.io/${{ github.repository }}:latest
-
-    - name: Delete old GHCR image versions
-      uses: actions/delete-package-versions@v5
-      with:
-        package-name: ${{ github.event.repository.name }}
-        package-type: 'container'
-        min-versions-to-keep: 5
-        owner: ${{ github.repository_owner }}
-        delete-only-untagged-versions: 'false'
 
     - name: Run Docker Scout
       uses: docker/scout-action@v1
