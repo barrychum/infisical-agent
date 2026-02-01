@@ -2,7 +2,7 @@ FROM python:3.12-slim
 
 # Define built-time variables
 # Retrieved in action yaml
-ARG VERSION=0.1.1
+ARG VERSION=0.2.0
 
 RUN pip install --no-cache-dir infisicalsdk pyyaml requests
 

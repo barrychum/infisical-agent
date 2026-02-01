@@ -4,10 +4,10 @@ from infisical_sdk import InfisicalSDKClient
 import time
 
 REFRESH_INTERVAL = 60  # seconds
+INDEFINITE_LOOP = True
 
-while True:
+while INDEFINITE_LOOP:
     try:
-
         # Path to mounted agent-config.yaml
         CONFIG_FILE = os.environ.get("AGENT_CONFIG", "/config/agent-config.yaml")
 
@@ -66,7 +66,10 @@ while True:
 
     except Exception as e:
         print(f"Error fetching secrets: {e}")
-    time.sleep(REFRESH_INTERVAL)
+        exit(1)
+
+    INDEFINITE_LOOP = False
+    # time.sleep(REFRESH_INTERVAL)
 
 
 
