@@ -2,7 +2,8 @@
 
 ![GitHub License](https://img.shields.io/github/license/barrychum/infisical-agent) ![Custom Badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/barrychum/6210ce668e923bd7b478ff9f965debee/raw/docker-infisical-agent-build-date-badge.json) 
 
-![Custom Badge](https://ghcr-badge.egpl.dev/barrychum/infisical-agent/tags?color=%2344cc11&ignore=&n=1&label=ghcr+tag&trim=) ![Custom Badge](https://ghcr-badge.egpl.dev/barrychum/infisical-agent/size?color=%2344cc11&tag=latest&label=image+size&trim=)
+![Custom Badge](https://ghcr-badge.egpl.dev/barrychum/infisical-agent/tags?color=%2344cc11&ignore=&n=1&label=image+tags&trim=) ![Custom Badge](https://ghcr-badge.egpl.dev/barrychum/infisical-agent/size?color=%2344cc11&tag=latest&label=image+size&trim=)
+
 
 Create a docker volume, infisical_shared_secrets, to store shared secrets.
 Deploy a container using the following docker compose.  Attach it to the same network of the inficial container.
