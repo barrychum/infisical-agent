@@ -1,6 +1,6 @@
 # infisical-agent
 
-![GitHub License](https://img.shields.io/github/license/barrychum/infisical-agent) ![Custom Badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/barrychum/6210ce668e923bd7b478ff9f965debee/raw/docker-openssh-build-date-badge.json) 
+![GitHub License](https://img.shields.io/github/license/barrychum/infisical-agent) ![Custom Badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/barrychum/6210ce668e923bd7b478ff9f965debee/raw/docker-infisical-agent-build-date-badge.json) 
 
 ![Custom Badge](https://ghcr-badge.egpl.dev/barrychum/infisical-agent/tags?color=%2344cc11&ignore=&n=1&label=ghcr+tag&trim=) ![Custom Badge](https://ghcr-badge.egpl.dev/barrychum/infisical-agent/size?color=%2344cc11&tag=latest&label=image+size&trim=)
 
@@ -29,5 +29,27 @@ volumes:
 networks:
   proxy:
     external: true
+```
+
+Sample of the agent-config.yaml
+```
+infisical:
+  address: "http://infisical-app:8080"
+  projectId: "your_infisical_project_id"
+  environment: "dev"        # or "prod"
+
+auth:
+  type: "client-credentials"      # this is auth type for self-hosted
+  config:
+    clientId: "your_client_id"
+    clientSecret: "your_client_secret"
+
+# The Agent writes secrets for different apps into subfolders
+templates:
+  - source: |
+      {{- with secret "secret_key" -}}
+      secret_key="{{ .Value }}"
+      {{- end -}}
+    destination: "/secrets/flask-app/.env"
 ```
 

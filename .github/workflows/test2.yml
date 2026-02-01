@@ -83,3 +83,51 @@ jobs:
         command: cves
         image: ${{ env.IMAGE_NAME }}:latest
 
+    # Save image digest to json
+    - name: Get image digest
+      id: get_digest
+      run: |
+        DIGEST=$(docker buildx imagetools inspect ${{ env.IMAGE_NAME }}:${{ env.TAG }} | grep -m 1 "Digest:" | awk '{ print $2 }')
+        JSON="build-artifact.json"
+        echo "json=$JSON" >> $GITHUB_OUTPUT        
+        cat <<EOF > $JSON
+        {
+          "image_name": "${{ env.IMAGE_NAME }}",
+          "tag": "${{ env.TAG }}",
+          "digest": "$DIGEST"
+        }
+        EOF
+
+    # Upload digest json from step get_digest to workflow artifact
+    - name: Upload build info as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ github.event.repository.name }}-build-artifact
+        path: ${{ steps.get_digest.outputs.json }}
+
+    # Generate json for shields.io Endpoint badge
+    - name: Generate badge data
+      id: badge_data
+      run: |
+        BADGE_VALUE=$(date -u +'%Y-%m-%d')
+        JSON="docker-infisical-agent-build-date-badge.json"
+        echo "json=$JSON" >> $GITHUB_OUTPUT
+        cat <<EOF > $JSON
+        {
+          "schemaVersion": 1,
+          "label": "build",
+          "message": "$BADGE_VALUE",
+          "color": "green"
+        }
+        EOF
+
+    # Upload json from step badge_data 
+    # to gist for shields.io Endpoint badge
+    - name: Create or update gist
+      uses: stellarhub/push-gist-action@v1
+      with:
+        token: ${{ secrets.DOCKER_ACCESS_TOKEN }}
+        gist_id: ${{ vars.GIST_ID }}
+        file_path: ${{ steps.badge_data.outputs.json }}
+        file_type: text
+
