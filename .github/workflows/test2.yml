@@ -8,6 +8,7 @@ on:
     paths:
       - 'Dockerfile'
       # use **/Dockerfile to match any path
+      - '.github/workflows/*.yml'
   release:
     # when a new reliease is published
     types: [published]
