@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read  # allow workflow to read repo only
-      packages: write # allow workflow to modify package (GHCR - Github Container Registry)
+      packages: write # allow workflow to modify package (GHCR - Github Container Registry) Needed for delete old GHCR step
     env:
       IMAGE_NAME: ${{ vars.IMAGE_NAME }}
     steps:
@@ -89,10 +89,10 @@ jobs:
           ${{ env.IMAGE_NAME }}:${{ env.TAG }}
           ghcr.io/${{ github.repository }}:latest
 
-    - name: Delete old image versions
+    - name: Delete old GHCR image versions
       uses: actions/delete-package-versions@v5
       with:
-        package-name: 'infisical-agent'
+        package-name: ${{ github.event.repository.name }}
         package-type: 'container'
         min-versions-to-keep: 1
         owner: ${{ github.repository_owner }}
