@@ -89,10 +89,11 @@ jobs:
     - name: Delete old image versions
       uses: actions/delete-package-versions@v5
       with:
-        package-name: ghcr.io/${{ github.repository }}
+        package-name: 'infisical-agent'
         package-type: 'container'
-        min-versions-to-keep: 5
-        delete-only-untagged-versions: 'true'
+        min-versions-to-keep: 1
+        owner: ${{ github.repository_owner }}
+        delete-only-untagged-versions: 'false'
 
     - name: Run Docker Scout
       uses: docker/scout-action@v1
