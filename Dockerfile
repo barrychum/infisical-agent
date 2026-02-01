@@ -8,5 +8,4 @@ RUN pip install --no-cache-dir infisicalsdk pyyaml requests
 
 WORKDIR /app
 COPY fetch_secrets.py .
-
 CMD ["python", "fetch_secrets.py"]
