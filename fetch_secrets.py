@@ -69,7 +69,7 @@ while INDEFINITE_LOOP:
         exit(1)
 
     INDEFINITE_LOOP = False
-    # time.sleep(REFRESH_INTERVAL)
+    time.sleep(REFRESH_INTERVAL)
 
 
 
