@@ -6,7 +6,8 @@ on:
     branches:
       - main
     paths:
-      - '/Dockerfile'
+      - 'Dockerfile'
+      # use **/Dockerfile to match any path
   release:
     # when a new reliease is published
     types: [published]
